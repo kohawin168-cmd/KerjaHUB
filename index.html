@@ -45,7 +45,7 @@
         <!-- Daftar Penawaran Kerja Terkini -->
         <div class="mb-4 flex justify-between items-center">
             <h3 class="text-sm font-bold text-gray-700">Lowongan Tersedia</h3>
-            <span class="text-xs text-indigo-600 font-medium">Demo Data</span>
+            <span class="text-xs text-indigo-600 font-medium">Data Simulasi</span>
         </div>
 
         <div id="job-feed" class="space-y-4">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="mt-4 pt-3 border-t border-gray-50 flex justify-between items-center">
                     <span class="text-[11px] text-gray-400">Estimasi: 1 Hari</span>
-                    <button onclick="triggerApply()" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100 transition">Lamar Sekarang</button>
+                    <button onclick="handleProtectedRoute('melamar pekerjaan')" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100 transition">Lamar Sekarang</button>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
                 </div>
                 <div class="mt-4 pt-3 border-t border-gray-50 flex justify-between items-center">
                     <span class="text-[11px] text-gray-400">Estimasi: 1 Hari</span>
-                    <button onclick="triggerApply()" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100 transition">Lamar Sekarang</button>
+                    <button onclick="handleProtectedRoute('melamar pekerjaan')" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100 transition">Lamar Sekarang</button>
                 </div>
             </div>
         </div>
@@ -86,40 +86,67 @@
 
     <!-- Bottom Navigation Bar (Mobile Friendly Layout) -->
     <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around py-2.5 text-center z-50 shadow-lg">
-        <a href="#" class="text-indigo-600 flex flex-col items-center">
+        <a href="#" class="text-indigo-600 flex flex-col items-center w-full">
             <span class="text-xs font-medium">Home</span>
         </a>
-        <a href="#" onclick="triggerApply()" class="text-gray-400 flex flex-col items-center hover:text-indigo-600">
+        <button onclick="handleProtectedRoute('membuka Dashboard')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition">
             <span class="text-xs font-medium">Dashboard</span>
-        </a>
-        <a href="#" onclick="triggerApply()" class="text-gray-400 flex flex-col items-center hover:text-indigo-600">
+        </button>
+        <button onclick="handleProtectedRoute('membuka fitur Chat')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition">
             <span class="text-xs font-medium">Chat</span>
-        </a>
+        </button>
     </div>
 
-    <!-- Script Placeholder Logic -->
+    <!-- Script Koneksi Supabase -->
     <script>
-        // Supabase configuration details placeholders
-        const SUPABASE_URL = 'https://jttdpmtkuydtjjipdhru.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_TQXKscRdoUaClLTnN_Sr7A_HTWg9D29';
+        // Memasukkan kredensial database Supabase Anda secara langsung
+        const SUPABASE_URL = "https://jttdpmtkuydtjjipdhru.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_TQXKscRdoUaClLTnN_Sr7A_HTWg9D29";
         
-        let supabase = null;
-        if(SUPABASE_URL !== 'https://jttdpmtkuydtjjipdhru.supabase.co') {
-            supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
+        // Inisialisasi client Supabase
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function loginWithGoogle() {
-            if(supabase) {
-                supabase.auth.signInWithOAuth({ provider: 'google' });
-            } else {
-                alert("Silakan hubungkan/masukkan SUPABASE_URL & ANON_KEY Anda terlebih dahulu di kode script index.html!");
+        // Fungsi penanganan autentikasi Google Auth
+        async function loginWithGoogle() {
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin
+                    }
+                });
+                if (error) throw error;
+            } catch (error) {
+                console.error("Error Auth:", error.message);
+                alert("Gagal menghubungkan ke Google Auth: " + error.message);
             }
         }
 
-        function triggerApply() {
-            alert("Anda harus masuk (Login / Registrasi) via Akun Google terlebih dahulu untuk melanjutkan!");
-            loginWithGoogle();
+        // Fungsi interaksi penguncian menu jika user belum login
+        async function handleProtectedRoute(actionName) {
+            // Cek session user saat ini
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            
+            if (!session) {
+                alert(`Untuk ${actionName}, Anda otomatis diarahkan untuk melakukan registrasi/login akun terlebih dahulu menggunakan Google Auth agar lebih mudah dan simpel.`);
+                loginWithGoogle();
+            } else {
+                alert(`Selamat datang! Anda berhasil mengakses fitur untuk ${actionName}.`);
+                // Di sini Anda bisa menambahkan routing halaman internal dashboard apabila session aktif
+            }
         }
+
+        // Memantau perubahan status login (auth state) secara realtime
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            const authBtnContainer = document.getElementById('auth-buttons');
+            if (session) {
+                authBtnContainer.innerHTML = `
+                    <button onclick="supabaseClient.auth.signOut().then(() => location.reload())" class="bg-red-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm hover:bg-red-600 transition">
+                        Keluar
+                    </button>
+                `;
+            }
+        });
     </script>
 </body>
 </html>
