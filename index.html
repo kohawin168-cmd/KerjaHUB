@@ -27,188 +27,161 @@
     <!-- CONTAINER UTAMA -->
     <main class="max-w-md mx-auto bg-white min-h-screen px-4 pt-6 shadow-sm">
         
-        <!-- HALAMAN ADMIN PANEL SUPER (SESUAI PERINTAH AWAL) -->
+        <!-- HALAMAN ADMIN PANEL -->
         <div id="tab-admin" class="tab-content space-y-6">
             <div class="bg-red-600 text-white p-4 rounded-xl shadow-sm flex justify-between items-center">
                 <div>
-                    <h2 class="text-base font-bold">KerjaHub Admin Control Panel</h2>
-                    <p class="text-[10px] text-red-100">Super Admin Mode Aktif</p>
+                    <h2 class="text-base font-bold">Admin Panel</h2>
+                    <p class="text-[10px] text-red-100">Super Admin Mode</p>
                 </div>
                 <button onclick="window.location.search=''; window.location.hash=''; location.reload();" class="bg-black/20 text-white text-[10px] px-3 py-1 rounded">Keluar</button>
             </div>
 
-            <!-- Bagian 1: Manajemen & Data Pengguna -->
-            <div class="border border-gray-200 p-4 rounded-xl space-y-3 bg-white shadow-sm">
-                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">👥 Database & Peran Pengguna</h3>
-                <div class="overflow-x-auto text-[11px]">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-gray-200 text-gray-400">
-                                <th class="pb-2">Username</th>
-                                <th class="pb-2">Role/Peran</th>
-                                <th class="pb-2 text-right">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100" id="admin-user-list">
-                            <tr>
-                                <td class="py-2 font-medium">budi_boss</td>
-                                <td class="py-2"><span class="bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded text-[10px]">Pemberi Kerja</span></td>
-                                <td class="py-2 text-right text-red-500 font-semibold cursor-pointer" onclick="alert('User disuspensi')">Suspend</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 font-medium">ahmad_pekerja</td>
-                                <td class="py-2"><span class="bg-green-100 text-green-700 px-1.5 py-0.5 rounded text-[10px]">Penerima Kerja</span></td>
-                                <td class="py-2 text-right text-red-500 font-semibold cursor-pointer" onclick="alert('User disuspensi')">Suspend</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="grid grid-cols-2 gap-2 text-center text-xs mb-4">
+                <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-gray-500 font-semibold">Kas Platform (10%)</p>
+                    <p class="text-indigo-600 font-bold text-sm">Rp 450.000</p>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+                    <p class="text-gray-500 font-semibold">Biaya Admin WD</p>
+                    <p class="text-indigo-600 font-bold text-sm">Rp 120.000</p>
                 </div>
             </div>
 
-            <!-- Bagian 2: Kontrol Escrow Global (Pelepasan Dana & Verifikasi Bank) -->
+            <!-- Managemen Verifikasi KYC -->
             <div class="border border-gray-200 p-4 rounded-xl space-y-3 bg-white shadow-sm">
-                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">💸 Sistem Transaksi & Rekening Escrow</h3>
-                <div class="space-y-2 text-xs" id="admin-escrow-list">
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 space-y-2">
-                        <div class="flex justify-between font-semibold">
-                            <span>Pekerjaan: Pangkas Pohon</span>
-                            <span class="text-indigo-600">Rp 150.000</span>
-                        </div>
-                        <p class="text-[10px] text-gray-500">Pemberi: budi_boss | Penerima: ahmad_pekerja</p>
-                        <div class="flex space-x-2 pt-1">
-                            <button onclick="alert('Dana sukses diteruskan ke Penerima Kerja!')" class="bg-green-600 text-white font-medium px-3 py-1 rounded text-[10px] flex-1">Cairkan ke Pekerja</button>
-                            <button onclick="alert('Dana di-refund kembali ke Pemberi Kerja karena pembatalan.')" class="bg-orange-500 text-white font-medium px-3 py-1 rounded text-[10px] flex-1">Refund ke Pemberi</button>
-                        </div>
+                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">🛡️ Verifikasi KYC Pengguna</h3>
+                <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center text-xs">
+                    <div>
+                        <p class="font-bold">Ahmad Pekerja</p>
+                        <p class="text-[10px] text-gray-500">KTP & Selfie Diunggah</p>
                     </div>
+                    <button onclick="alert('User Terverifikasi!')" class="bg-green-600 text-white px-3 py-1 rounded">Approve</button>
                 </div>
             </div>
 
-            <!-- Bagian 3: Moderasi Lowongan Aktif -->
+            <!-- Managemen Penarikan & QRIS -->
             <div class="border border-gray-200 p-4 rounded-xl space-y-3 bg-white shadow-sm">
-                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">📌 Moderasi Konten Lowongan Kerja</h3>
-                <div class="space-y-2 text-xs" id="admin-jobs-list">
-                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-100 flex justify-between items-center">
-                        <div>
-                            <p class="font-bold text-gray-900">Membersihkan Halaman Belakang</p>
-                            <p class="text-gray-400 text-[10px]">Oleh: budi_boss</p>
-                        </div>
-                        <button onclick="alert('Lowongan diturunkan/dihapus oleh Admin.')" class="bg-red-500 text-white font-semibold px-2 py-1 rounded text-[10px]">Hapus Iklan</button>
-                    </div>
-                </div>
+                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">💸 Laporan & QRIS Pembayaran</h3>
+                <button onclick="alert('Faktur QRIS berhasil diunggah ke sistem.')" class="w-full bg-indigo-50 text-indigo-600 border border-indigo-200 font-semibold px-4 py-2 rounded-lg text-xs">Upload QRIS Manager</button>
             </div>
         </div>
         
         <!-- HALAMAN 1: HOME (LOWONGAN KERJA) -->
         <div id="tab-home" class="tab-content active space-y-6">
             <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-5 rounded-2xl shadow-sm">
-                <h2 class="text-lg font-bold">Cari Kerja Lokal & Mikro Mudah</h2>
-                <p class="text-xs text-indigo-100 mt-1">Sistem Escrow Terjamin untuk Pemberi & Penerima Kerja.</p>
+                <h2 class="text-lg font-bold">Cari Kerja & Pekerja Mudah</h2>
+                <p class="text-xs text-indigo-100 mt-1">Sistem Escrow Terjamin. Bayar via platform, dana aman.</p>
             </div>
 
-            <!-- Form Pasang Iklan (Hanya Muncul untuk Pemberi Kerja) -->
+            <!-- Form Pasang Iklan -->
             <div id="post-job-section" class="hidden bg-indigo-50 border border-indigo-100 p-4 rounded-xl shadow-sm">
-                <h3 class="text-xs font-bold text-indigo-900 mb-2">📢 Cari Pekerja? Publikasikan Lowongan Baru</h3>
+                <h3 class="text-xs font-bold text-indigo-900 mb-2">📢 Buat Penawaran Kerja Baru</h3>
                 <div class="space-y-2">
-                    <input type="text" id="job-title" placeholder="Nama Pekerjaan (Contoh: Pangkas Pohon)" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none">
-                    <input type="number" id="job-budget" placeholder="Besaran Upah (Rp)" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none">
-                    <textarea id="job-desc" placeholder="Tulis instruksi pekerjaan di sini..." class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none h-16"></textarea>
-                    <button onclick="postJob()" class="w-full bg-indigo-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-indigo-700">Publikasikan Lowongan</button>
+                    <input type="text" id="job-title" placeholder="Jenis Pekerjaan (Misal: Tukang Kebun)" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none">
+                    <input type="number" id="job-budget" placeholder="Tarif Harga (Rp)" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none">
+                    <input type="text" id="job-time" placeholder="Waktu Estimasi (Misal: 2 Hari)" class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none">
+                    <textarea id="job-desc" placeholder="Kriteria Pekerja dan Skil yang dibutuhkan..." class="w-full border border-gray-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none h-16"></textarea>
+                    <button onclick="saveJobToDatabase()" class="w-full bg-indigo-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-indigo-700">Posting Pekerjaan</button>
                 </div>
             </div>
 
             <div class="flex justify-between items-center">
-                <h3 class="text-sm font-bold text-gray-700">Lini Masa Lowongan Tersedia</h3>
+                <h3 class="text-sm font-bold text-gray-700">Pekerjaan Tersedia</h3>
+                <button onclick="fetchJobsFromDatabase()" class="text-[10px] text-indigo-600 underline">Refresh</button>
             </div>
 
+            <!-- Tempat Data dari Database Muncul -->
             <div id="job-feed" class="space-y-4">
-                <div class="border border-gray-100 bg-white p-4 rounded-xl shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">Tersedia</span>
-                            <span class="text-xs font-bold text-indigo-600">Rp 150.000</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-gray-900 mt-2">Membersihkan Halaman Belakang & Pangkas Pohon</h4>
-                        <p class="text-xs text-gray-500 mt-1 line-clamp-2">Dibutuhkan segera tukang harian untuk memotong rumput liar area kebun rumah.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-50 flex justify-between items-center">
-                        <span class="text-[11px] text-gray-400">Escrow System Aktif</span>
-                        <button onclick="handleApplyJob('Membersihkan Halaman Belakang')" id="btn-apply-action" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100">Lamar Kerja</button>
-                    </div>
-                </div>
+                <div class="text-center text-xs text-gray-500">Memuat data pekerjaan dari database...</div>
             </div>
         </div>
 
         <!-- HALAMAN 2: DASHBOARD USER -->
         <div id="tab-dashboard" class="tab-content space-y-6">
-            <h2 class="text-base font-bold text-gray-900">Dashboard Akun Saya</h2>
+            <div class="flex justify-between items-end">
+                <h2 class="text-base font-bold text-gray-900">Dashboard Akun</h2>
+                <span id="badge-peran" class="text-[9px] bg-gray-200 px-2 py-0.5 rounded font-bold">Memuat...</span>
+            </div>
+
             <div class="bg-gray-900 text-white p-5 rounded-2xl shadow-md">
-                <div class="flex justify-between items-center">
-                    <span class="text-[11px] text-gray-400 tracking-wider uppercase">Saldo Dompet Anda</span>
-                    <span id="badge-peran" class="text-[9px] bg-white/20 px-2 py-0.5 rounded font-bold">Memuat...</span>
-                </div>
+                <span class="text-[11px] text-gray-400 tracking-wider uppercase">Saldo Dompet Saya</span>
                 <span class="text-2xl font-black mt-1 block" id="wallet-balance">Rp 0</span>
+                <p class="text-[9px] text-gray-400 mt-1" id="fee-notice">Biaya penarikan: Rp 10.000 / transaksi</p>
                 <div class="flex space-x-2 mt-4">
-                    <button onclick="alert('Metode isi saldo instan sedang diverifikasi.')" class="bg-white/20 text-white text-xs font-medium px-4 py-2 rounded-xl flex-1">Isi Saldo (Top Up)</button>
-                    <button onclick="alert('Pengajuan penarikan dana telah dikirimkan ke Admin Panel untuk diproses.')" class="bg-indigo-600 text-white text-xs font-medium px-4 py-2 rounded-xl flex-1">Tarik Saldo</button>
+                    <button onclick="alert('Arahkan ke QRIS Platform untuk pembayaran Escrow.')" class="bg-white/20 text-white text-xs font-medium px-4 py-2 rounded-xl flex-1">Deposit</button>
+                    <button onclick="alert('Permintaan penarikan diajukan. Saldo akan dipotong biaya adm.')" class="bg-indigo-600 text-white text-xs font-medium px-4 py-2 rounded-xl flex-1">Tarik Saldo</button>
                 </div>
             </div>
 
-            <div class="border border-gray-200 p-4 rounded-xl space-y-3">
-                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Kredensial Penarikan Uang (Data Bank)</h3>
-                <input type="text" id="bank-name" placeholder="Nama Bank (BCA / Mandiri / BRI)" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-xs">
-                <input type="text" id="bank-account" placeholder="Nomor Rekening Tujuan" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-xs">
-                <button onclick="saveBankData()" class="bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-lg w-full">Simpan Data Bank</button>
+            <!-- Verifikasi KYC -->
+            <div class="border border-gray-200 p-4 rounded-xl space-y-3 bg-orange-50">
+                <h3 class="text-xs font-bold text-orange-800 uppercase tracking-wider">Verifikasi Data (KYC) Wajib</h3>
+                <p class="text-[10px] text-orange-600">Upload KTP & Selfie diri untuk keamanan platform.</p>
+                <input type="file" accept="image/*" class="w-full text-xs file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-orange-100 file:text-orange-700">
+                <button onclick="alert('Data diri diunggah dan menunggu persetujuan Admin.')" class="bg-orange-600 text-white text-xs font-semibold px-4 py-2 rounded-lg w-full">Kirim Verifikasi</button>
             </div>
 
             <div class="space-y-3">
-                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Aktivitas Hubungan Kerja</h3>
-                <div id="my-applications" class="text-xs text-gray-500 italic bg-gray-50 p-4 rounded-xl border border-dashed border-gray-200 text-center">
-                    Tidak ada aktivitas hubungan kerja terdeteksi saat ini.
+                <h3 class="text-xs font-bold text-gray-700 uppercase tracking-wider">History Pekerjaan</h3>
+                <div id="my-applications" class="text-xs text-gray-500 bg-gray-50 p-4 rounded-xl border border-gray-200 text-center">
+                    Belum ada history.
                 </div>
             </div>
         </div>
 
         <!-- HALAMAN 3: CHAT -->
         <div id="tab-chat" class="tab-content space-y-4">
-            <h2 class="text-base font-bold text-gray-900">Pesan Hubungan (Chat)</h2>
+            <h2 class="text-base font-bold text-gray-900">Chatbox Pesan</h2>
             <div class="border border-gray-100 p-8 rounded-2xl bg-gray-50 text-center">
-                <p class="text-xs text-gray-400">Fitur chat otomatis aktif apabila admin atau sistem escrow mendeteksi lamaran disetujui.</p>
+                <p class="text-xs text-gray-400">Pemberi Kerja dan Penerima Kerja dapat mengobrol di sini setelah lamaran disetujui.</p>
             </div>
         </div>
     </main>
 
-    <!-- MODAL POPUP LOGIN & REGISTRASI (DENGAN 2 OPSI PERAN) -->
+    <!-- MODAL POPUP LOGIN & REGISTRASI -->
     <div id="auth-modal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-xl">
             <div class="flex justify-between items-center mb-4">
-                <h3 id="modal-title" class="text-base font-bold text-gray-900">Masuk Akun</h3>
+                <h3 id="modal-title" class="text-base font-bold text-gray-900">Masuk / Daftar Akun</h3>
                 <button onclick="toggleAuthModal()" class="text-gray-400 hover:text-gray-600 text-xl">&times;</button>
             </div>
             <div class="space-y-3">
-                <input type="text" id="auth-username" placeholder="Nama Pengguna (Username)" class="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm">
-                <input type="password" id="auth-password" placeholder="Kata Sandi (Password)" class="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm">
                 
-                <!-- PILIHAN 2 OPSI PERAN (Hanya terlihat saat mode Daftar Baru) -->
-                <div id="role-selection-box" class="hidden space-y-1">
-                    <label class="text-xs font-semibold text-gray-600">Pilih Peran Akun Anda:</label>
+                <!-- LOGIN VIA GOOGLE -->
+                <button onclick="loginWithGoogle()" class="w-full bg-white border border-gray-300 text-gray-700 text-sm font-semibold py-2.5 rounded-xl flex justify-center items-center gap-2 hover:bg-gray-50">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    Lanjutkan dengan Google
+                </button>
+
+                <div class="relative flex py-2 items-center">
+                    <div class="flex-grow border-t border-gray-200"></div>
+                    <span class="flex-shrink-0 mx-4 text-gray-400 text-xs">Atau gunakan Username</span>
+                    <div class="flex-grow border-t border-gray-200"></div>
+                </div>
+
+                <input type="text" id="auth-username" placeholder="Username" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                <input type="password" id="auth-password" placeholder="Password" class="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm">
+                
+                <div id="role-selection-box" class="space-y-1">
+                    <label class="text-xs font-semibold text-gray-600">Peran Anda (Wajib untuk daftar baru):</label>
                     <select id="auth-role" class="w-full border border-gray-300 bg-white rounded-xl px-3 py-2 text-xs focus:outline-none">
-                        <option value="pemberi_kerja">Saya adalah Pemberi Kerja (Mencari Pekerja)</option>
-                        <option value="penerima_kerja">Saya adalah Penerima Kerja / Freelancer (Mencari Uang)</option>
+                        <option value="pemberi_kerja">Pemberi Kerja (Mencari Pekerja)</option>
+                        <option value="penerima_kerja">Pencari Kerja (Penerima Tugas)</option>
                     </select>
                 </div>
 
-                <button onclick="submitAuth()" id="btn-submit-auth" class="w-full bg-indigo-600 text-white text-sm font-semibold py-2.5 rounded-xl mt-2">Masuk Sekarang</button>
-                <p class="text-center text-xs text-gray-500 mt-3">
-                    <span id="auth-toggle-text">Belum punya akun?</span>
-                    <button onclick="switchAuthMode()" id="btn-switch-mode" class="text-indigo-600 font-semibold underline ml-1">Daftar Baru</button>
-                </p>
+                <div class="flex space-x-2">
+                    <button onclick="submitAuth(true)" class="w-1/2 bg-gray-200 text-gray-800 text-sm font-semibold py-2.5 rounded-xl">Masuk</button>
+                    <button onclick="submitAuth(false)" class="w-1/2 bg-indigo-600 text-white text-sm font-semibold py-2.5 rounded-xl">Daftar</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Nav -->
     <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around py-2.5 text-center z-50 shadow-lg">
-        <button onclick="switchTab('home')" id="nav-home" class="text-indigo-600 flex flex-col items-center w-full font-semibold text-xs">Home</button>
+        <button onclick="switchTab('home')" id="nav-home" class="text-indigo-600 flex flex-col items-center w-full font-semibold text-xs">Beranda</button>
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="text-gray-400 flex flex-col items-center w-full text-xs">Dashboard</button>
         <button onclick="switchTab('chat')" id="nav-chat" class="text-gray-400 flex flex-col items-center w-full text-xs">Chat</button>
     </div>
@@ -219,28 +192,10 @@
         const SUPABASE_ANON_KEY = "sb_publishable_TQXKscRdoUaClLTnN_Sr7A_HTWg9D29";
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        let isLoginMode = true;
-        const SUPER_ADMIN_KEY = "admin123"; // Sandi masuk admin panel
+        let currentUser = null;
+        const SUPER_ADMIN_KEY = "superadmin123"; 
 
-        function toggleAuthModal() {
-            document.getElementById('auth-modal').classList.toggle('hidden');
-        }
-
-        function switchAuthMode() {
-            isLoginMode = !isLoginMode;
-            document.getElementById('modal-title').innerText = isLoginMode ? 'Masuk Akun' : 'Daftar Akun Baru';
-            document.getElementById('btn-submit-auth').innerText = isLoginMode ? 'Masuk Sekarang' : 'Daftar Sekarang';
-            document.getElementById('auth-toggle-text').innerText = isLoginMode ? 'Belum punya akun?' : 'Sudah punya akun?';
-            document.getElementById('btn-switch-mode').innerText = isLoginMode ? 'Daftar Baru' : 'Masuk Sini';
-            
-            const roleBox = document.getElementById('role-selection-box');
-            if (isLoginMode) { roleBox.classList.add('hidden'); } else { roleBox.classList.remove('hidden'); }
-        }
-
-        async function checkSession() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            return session;
-        }
+        function toggleAuthModal() { document.getElementById('auth-modal').classList.toggle('hidden'); }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -262,123 +217,182 @@
         function handleAdminRouting() {
             const params = new URLSearchParams(window.location.search);
             if (params.get('page') === 'admin' || window.location.hash === '#admin') {
-                const askPass = prompt("Otorisasi Kunci Keamanan Super Admin KerjaHub:");
-                if (askPass === SUPER_ADMIN_KEY) {
+                if (prompt("Masukkan Kunci Super Admin:") === SUPER_ADMIN_KEY) {
                     switchTab('admin');
                 } else {
-                    alert("Akses Admin ditolak!");
-                    window.location.search = "";
+                    alert("Akses Admin ditolak!"); window.location.search = "";
                 }
             }
         }
 
-        async function submitAuth() {
-            const username = document.getElementById('auth-username').value.trim().toLowerCase();
+        // --- SISTEM AUTH & GOOGLE ---
+        async function loginWithGoogle() {
+            // Catatan: Google Auth butuh pengaturan Client ID di dashboard Supabase agar berfungsi.
+            const { error } = await supabaseClient.auth.signInWithOAuth({ provider: 'google' });
+            if (error) alert("Sistem Google Auth belum dikonfigurasi di server: " + error.message);
+        }
+
+        async function submitAuth(isLogin) {
+            const username = document.getElementById('auth-username').value.trim();
             const password = document.getElementById('auth-password').value.trim();
             const role = document.getElementById('auth-role').value;
-            const simulatedEmail = `${username}@kerjahub.local`;
+            const email = `${username}@kerjahub.local`;
 
             try {
-                if (isLoginMode) {
-                    const { error } = await supabaseClient.auth.signInWithPassword({ email: simulatedEmail, password: password });
+                if (isLogin) {
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                     if (error) throw error;
                     alert("Berhasil masuk!");
                 } else {
-                    // Pendaftaran Baru + Menyimpan Peran ke metadata akun Supabase
                     const { data, error } = await supabaseClient.auth.signUp({ 
-                        email: simulatedEmail, 
-                        password: password,
-                        options: { data: { user_role: role } }
+                        email, password, options: { data: { role: role } }
                     });
                     if (error) throw error;
                     
-                    // Simpan data peran lokal sebagai backup
-                    localStorage.setItem(`role_${username}`, role);
-                    alert("Pendaftaran Berhasil sebagai " + (role === 'pemberi_kerja' ? 'Pemberi Kerja' : 'Penerima Kerja'));
-                    switchAuthMode(); return;
+                    // Simpan profile ke database
+                    if (data.user) {
+                        await supabaseClient.from('profiles').insert([{ id: data.user.id, role: role, email: email }]);
+                    }
+                    alert("Berhasil mendaftar!");
                 }
-                toggleAuthModal(); location.reload();
+                location.reload();
             } catch (error) {
-                alert("Gagal Konfigurasi: " + error.message);
+                alert("Gagal: " + error.message);
             }
         }
 
-        function handleApplyJob(jobName) {
-            checkSession().then(session => {
-                if(!session) { alert("Silakan login dahulu!"); toggleAuthModal(); return; }
-                const currentEmail = session.user.email.split('@')[0];
-                const myRole = localStorage.getItem(`role_${currentEmail}`) || session.user.user_metadata.user_role;
-                
-                if (myRole === 'pemberi_kerja') {
-                    alert("Gagal: Akun Anda adalah Pemberi Kerja. Anda tidak bisa melamar lowongan Anda sendiri!");
-                } else {
-                    document.getElementById('my-applications').innerHTML = `
-                        <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-lg text-left text-gray-800">
-                            <p class="font-bold">${jobName}</p>
-                            <p class="text-[10px] text-orange-600 font-semibold mt-1">Status: Menunggu Dana Escrow Admin Disetujui</p>
+        // --- SISTEM DATABASE PEKERJAAN (CRUD) ---
+        
+        // 1. SIMPAN KERJA KE DATABASE SUPABASE
+        async function saveJobToDatabase() {
+            if (!currentUser) return alert("Sesi habis, silakan login ulang.");
+            
+            const title = document.getElementById('job-title').value;
+            const budget = document.getElementById('job-budget').value;
+            const time = document.getElementById('job-time').value;
+            const desc = document.getElementById('job-desc').value;
+
+            if(!title || !budget || !desc) return alert("Harap lengkapi semua data!");
+
+            const fullDesc = `Estimasi: ${time}. Kriteria: ${desc}`;
+
+            const { data, error } = await supabaseClient
+                .from('jobs')
+                .insert([{ employer_id: currentUser.id, title: title, budget: budget, description: fullDesc }]);
+
+            if (error) {
+                alert("Gagal menyimpan ke database! Pastikan Anda sudah menjalankan query SQL di Supabase.");
+                console.error(error);
+            } else {
+                alert("Lowongan berhasil disimpan di Database & dipublikasikan!");
+                document.getElementById('job-title').value = '';
+                document.getElementById('job-budget').value = '';
+                document.getElementById('job-time').value = '';
+                document.getElementById('job-desc').value = '';
+                fetchJobsFromDatabase(); // Refresh feed
+            }
+        }
+
+        // 2. AMBIL KERJA DARI DATABASE SUPABASE
+        async function fetchJobsFromDatabase() {
+            const feed = document.getElementById('job-feed');
+            feed.innerHTML = '<div class="text-center text-xs text-gray-500">Memuat dari database...</div>';
+
+            const { data: jobs, error } = await supabaseClient.from('jobs').select('*').order('created_at', { ascending: false });
+
+            if (error) {
+                feed.innerHTML = `<div class="text-red-500 text-xs text-center">Belum ada tabel 'jobs' di database. Jalankan SQL Tahap 1.</div>`;
+                return;
+            }
+
+            if (jobs.length === 0) {
+                // Tampilkan Demo Jobs jika DB masih kosong
+                feed.innerHTML = `
+                    <div class="border border-gray-100 bg-white p-4 rounded-xl shadow-sm">
+                        <span class="bg-gray-200 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Demo Data</span>
+                        <div class="flex justify-between items-start mt-2">
+                            <h4 class="text-sm font-bold">Jasa Bersih Halaman</h4>
+                            <span class="text-xs font-bold text-indigo-600">Rp 100.000</span>
                         </div>
-                    `;
-                    alert("Lamaran dikirim! Uang proyek aman dalam jaminan sistem Escrow Admin.");
-                }
+                        <p class="text-xs text-gray-500 mt-1">Estimasi: 1 Hari. Kriteria: Punya alat potong sendiri.</p>
+                        <button onclick="handleApplyJob(999)" class="mt-3 bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg w-full">Lamar (Tutup otomatis jika diterima)</button>
+                    </div>`;
+                return;
+            }
+
+            feed.innerHTML = '';
+            jobs.forEach(job => {
+                const html = `
+                <div class="border border-gray-200 bg-white p-4 rounded-xl shadow-sm flex flex-col justify-between mb-3" id="job-${job.id}">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-sm font-bold text-gray-900">${job.title}</h4>
+                            <span class="text-xs font-bold text-indigo-600">Rp ${parseInt(job.budget).toLocaleString('id-ID')}</span>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mt-1">${job.description}</p>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-gray-50">
+                        <button onclick="handleApplyJob(${job.id})" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg w-full hover:bg-indigo-100">Ajukan Lamaran</button>
+                    </div>
+                </div>`;
+                feed.insertAdjacentHTML('beforeend', html);
             });
         }
 
-        function postJob() {
-            const title = document.getElementById('job-title').value;
-            const budget = document.getElementById('job-budget').value;
-            const desc = document.getElementById('job-desc').value;
+        async function handleApplyJob(jobId) {
+            if(!currentUser) { alert("Silakan login atau daftar akun terlebih dahulu!"); toggleAuthModal(); return; }
+            
+            const myRole = currentUser.user_metadata.role;
+            if (myRole === 'pemberi_kerja') {
+                alert("Akun Anda Pemberi Kerja. Anda tidak bisa melamar pekerjaan!"); return;
+            }
 
-            if(!title || !budget) { alert("Data lowongan kurang lengkap!"); return; }
-
-            const newJob = `
-                <div class="border border-indigo-100 bg-indigo-50/40 p-4 rounded-xl shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">Tawaran Baru</span>
-                            <span class="text-xs font-bold text-indigo-600">Rp ${parseInt(budget).toLocaleString('id-ID')}</span>
-                        </div>
-                        <h4 class="text-sm font-bold text-gray-900 mt-2">${title}</h4>
-                        <p class="text-xs text-gray-500 mt-1">${desc}</p>
-                    </div>
-                </div>
-            `;
-            document.getElementById('job-feed').insertAdjacentHTML('afterbegin', newJob);
-            alert("Lowongan kerja berhasil dirilis!");
-        }
-
-        function saveBankData() {
-            localStorage.setItem('kh_bank_name', document.getElementById('bank-name').value);
-            localStorage.setItem('kh_bank_acc', document.getElementById('bank-account').value);
-            alert("Informasi akun bank Anda diamankan!");
+            if(confirm("Lamar pekerjaan ini? Jika diterima oleh bos, postingan ini akan otomatis terhapus dari beranda (Sesuai sistem).")) {
+                // Simulasi penghapusan dari beranda jika diterima
+                const jobEl = document.getElementById(`job-${jobId}`);
+                if(jobEl) jobEl.remove();
+                
+                document.getElementById('my-applications').innerHTML = `
+                    <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-lg text-left text-gray-800">
+                        <p class="font-bold text-sm">Lamaran ID: #${jobId}</p>
+                        <p class="text-[10px] text-orange-600 font-semibold mt-1">Menunggu pembayaran Escrow dari pemberi kerja ke Platform.</p>
+                        <p class="text-[9px] text-gray-500 mt-1">*Jika selesai, upah dipotong biaya platform 10%.</p>
+                    </div>`;
+                alert("Notifikasi telah dikirim ke Pemberi Kerja!");
+            }
         }
 
         supabaseClient.auth.onAuthStateChange((event, session) => {
             if (session) {
-                const username = session.user.email.split('@')[0];
-                const myRole = localStorage.getItem(`role_${username}`) || session.user.user_metadata.user_role || "penerima_kerja";
+                currentUser = session.user;
+                const role = session.user.user_metadata.role || "penerima_kerja";
                 
                 document.getElementById('auth-buttons').innerHTML = `
-                    <button onclick="supabaseClient.auth.signOut().then(() => { localStorage.clear(); location.reload(); })" class="bg-red-500 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full">Keluar (${username})</button>
+                    <button onclick="supabaseClient.auth.signOut().then(() => location.reload())" class="bg-red-500 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full">Keluar</button>
                 `;
 
-                // Kondisional Tampilan Berdasarkan Peran Akun
                 const badge = document.getElementById('badge-peran');
-                if(myRole === 'pemberi_kerja') {
+                const feeNotice = document.getElementById('fee-notice');
+
+                if(role === 'pemberi_kerja') {
                     badge.innerText = "PEMBERI KERJA";
                     badge.className = "text-[9px] bg-purple-600 text-white px-2 py-0.5 rounded font-bold";
-                    document.getElementById('post-job-section').classList.remove('hidden'); // Bisa pasang lowongan
-                    document.getElementById('btn-apply-action').style.display = 'none'; // Tombol lamar hilang
-                    document.getElementById('wallet-balance').innerText = "Rp 1.000.000"; // Simulasi Modal Pekerjaan
+                    document.getElementById('post-job-section').classList.remove('hidden');
+                    feeNotice.innerText = "Biaya Admin Penarikan: Rp 10.000/transaksi";
                 } else {
-                    badge.innerText = "PENERIMA KERJA";
+                    badge.innerText = "PENCARI KERJA (PEKERJA)";
                     badge.className = "text-[9px] bg-green-600 text-white px-2 py-0.5 rounded font-bold";
-                    document.getElementById('post-job-section').classList.add('hidden'); // Tidak bisa pasang lowongan
-                    document.getElementById('wallet-balance').innerText = "Rp 350.000"; // Simulasi Tabungan Upah
+                    document.getElementById('post-job-section').classList.add('hidden');
+                    feeNotice.innerText = "Potongan Platform 10% & Biaya Penarikan (WD) 5%";
                 }
             }
         });
 
-        window.onload = handleAdminRouting;
+        // Inisialisasi awal
+        window.onload = () => {
+            handleAdminRouting();
+            fetchJobsFromDatabase(); // Panggil fungsi tarik database saat web dibuka
+        };
     </script>
 </body>
 </html>
