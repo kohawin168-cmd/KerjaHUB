@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KerjaHub - Penghubung Kerja Mikro & Lokal</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -18,13 +16,13 @@
     <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 px-4 py-3 flex justify-between items-center max-w-md mx-auto w-full">
         <h1 class="text-xl font-bold text-indigo-600">KerjaHub</h1>
         <div id="auth-buttons">
-            <button onclick="loginWithGoogle()" class="bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm hover:bg-indigo-700 transition">
+            <button onclick="toggleAuthModal()" class="bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm hover:bg-indigo-700 transition">
                 Masuk / Daftar
             </button>
         </div>
     </nav>
 
-    <!-- Main Content Box Container (Mobile Responsive View) -->
+    <!-- Main Content Container -->
     <main class="max-w-md mx-auto bg-white min-h-screen px-4 pt-6 shadow-sm">
         
         <!-- Welcome Banner -->
@@ -33,47 +31,29 @@
             <p class="text-xs text-indigo-100 mt-1">Hubungkan pemberi kerja & pencari kerja dengan aman lewat Sistem Escrow.</p>
         </div>
 
-        <!-- Filter / Kategori Singkat -->
+        <!-- Filter Kategori -->
         <div class="flex space-x-2 overflow-x-auto pb-3 mb-4" style="-webkit-overflow-scrolling: touch;">
             <button class="bg-indigo-600 text-white text-xs px-4 py-1.5 rounded-full flex-shrink-0">Semua</button>
             <button class="bg-gray-100 text-gray-600 text-xs px-4 py-1.5 rounded-full flex-shrink-0">Tukang Kebun</button>
             <button class="bg-gray-100 text-gray-600 text-xs px-4 py-1.5 rounded-full flex-shrink-0">Bersih-bersih</button>
             <button class="bg-gray-100 text-gray-600 text-xs px-4 py-1.5 rounded-full flex-shrink-0">Antar-Jemput</button>
-            <button class="bg-gray-100 text-gray-600 text-xs px-4 py-1.5 rounded-full flex-shrink-0">Online/Remote</button>
         </div>
 
-        <!-- Daftar Penawaran Kerja Terkini -->
+        <!-- Daftar Lowongan -->
         <div class="mb-4 flex justify-between items-center">
             <h3 class="text-sm font-bold text-gray-700">Lowongan Tersedia</h3>
             <span class="text-xs text-indigo-600 font-medium">Data Simulasi</span>
         </div>
 
         <div id="job-feed" class="space-y-4">
-            <!-- Job Card 1 -->
-            <div class="border border-gray-100 bg-white p-4 rounded-xl shadow-xs flex flex-col justify-between">
+            <div class="border border-gray-100 bg-white p-4 rounded-xl shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="flex justify-between items-start">
                         <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">Offline</span>
                         <span class="text-xs font-bold text-indigo-600">Rp 150.000</span>
                     </div>
                     <h4 class="text-sm font-bold text-gray-900 mt-2">Membersihkan Halaman Belakang & Pangkas Pohon</h4>
-                    <p class="text-xs text-gray-500 mt-1 line-clamp-2">Dibutuhkan segera tukang kebun harian untuk memotong rumput liar dan merapikan tanaman rambat di area Jakarta Selatan.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-gray-50 flex justify-between items-center">
-                    <span class="text-[11px] text-gray-400">Estimasi: 1 Hari</span>
-                    <button onclick="handleProtectedRoute('melamar pekerjaan')" class="bg-indigo-50 text-indigo-600 text-xs font-semibold px-4 py-1.5 rounded-lg hover:bg-indigo-100 transition">Lamar Sekarang</button>
-                </div>
-            </div>
-
-            <!-- Job Card 2 -->
-            <div class="border border-gray-100 bg-white p-4 rounded-xl shadow-xs flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start">
-                        <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">Offline</span>
-                        <span class="text-xs font-bold text-indigo-600">Rp 250.000</span>
-                    </div>
-                    <h4 class="text-sm font-bold text-gray-900 mt-2">Deep Cleaning Apartemen Tipe Studio Kosong</h4>
-                    <p class="text-xs text-gray-500 mt-1 line-clamp-2">Pembersihan menyeluruh sebelum serah terima kunci. Alat pembersih sudah disediakan di lokasi unit.</p>
+                    <p class="text-xs text-gray-500 mt-1 line-clamp-2">Dibutuhkan segera tukang kebun harian untuk memotong rumput liar di area Jakarta Selatan.</p>
                 </div>
                 <div class="mt-4 pt-3 border-t border-gray-50 flex justify-between items-center">
                     <span class="text-[11px] text-gray-400">Estimasi: 1 Hari</span>
@@ -81,69 +61,115 @@
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Bottom Navigation Bar (Mobile Friendly Layout) -->
-    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around py-2.5 text-center z-50 shadow-lg">
-        <a href="#" class="text-indigo-600 flex flex-col items-center w-full">
-            <span class="text-xs font-medium">Home</span>
-        </a>
-        <button onclick="handleProtectedRoute('membuka Dashboard')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition">
-            <span class="text-xs font-medium">Dashboard</span>
-        </button>
-        <button onclick="handleProtectedRoute('membuka fitur Chat')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition">
-            <span class="text-xs font-medium">Chat</span>
-        </button>
+    <!-- MODAL POPUP LOGIN & REGISTRASI -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modal-title" class="text-base font-bold text-gray-900">Masuk Akun</h3>
+                <button onclick="toggleAuthModal()" class="text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-medium text-gray-600">Nomor HP (Contoh: +62812345678)</label>
+                    <input type="tel" id="auth-phone" placeholder="+628xxxxxxxx" class="w-full mt-1 border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-600">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-gray-600">Kata Sandi (Password)</label>
+                    <input type="password" id="auth-password" placeholder="Minimal 6 karakter" class="w-full mt-1 border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-indigo-600">
+                </div>
+                
+                <button onclick="submitAuth()" id="btn-submit-auth" class="w-full bg-indigo-600 text-white text-sm font-semibold py-2.5 rounded-xl mt-2 hover:bg-indigo-700 transition">
+                    Masuk Sekarang
+                </button>
+                
+                <p class="text-center text-xs text-gray-500 mt-3">
+                    <span id="auth-toggle-text">Belum punya akun?</span>
+                    <button onclick="switchAuthMode()" id="btn-switch-mode" class="text-indigo-600 font-semibold underline ml-1">Daftar Baru</button>
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- Script Koneksi Supabase -->
+    <!-- Bottom Navigation Bar -->
+    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 flex justify-around py-2.5 text-center z-50 shadow-lg">
+        <a href="#" class="text-indigo-600 flex flex-col items-center w-full"><span class="text-xs font-medium">Home</span></a>
+        <button onclick="handleProtectedRoute('membuka Dashboard')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition"><span class="text-xs font-medium">Dashboard</span></button>
+        <button onclick="handleProtectedRoute('membuka fitur Chat')" class="text-gray-400 flex flex-col items-center w-full hover:text-indigo-600 transition"><span class="text-xs font-medium">Chat</span></button>
+    </div>
+
+    <!-- Script Utama -->
     <script>
-        // Memasukkan kredensial database Supabase Anda secara langsung
         const SUPABASE_URL = "https://jttdpmtkuydtjjipdhru.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_TQXKscRdoUaClLTnN_Sr7A_HTWg9D29";
-        
-        // Inisialisasi client Supabase
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Fungsi penanganan autentikasi Google Auth
-        async function loginWithGoogle() {
+        let isLoginMode = true;
+
+        function toggleAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function switchAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('modal-title').innerText = isLoginMode ? 'Masuk Akun' : 'Daftar Akun Baru';
+            document.getElementById('btn-submit-auth').innerText = isLoginMode ? 'Masuk Sekarang' : 'Daftar Sekarang';
+            document.getElementById('auth-toggle-text').innerText = isLoginMode ? 'Belum punya akun?' : 'Sudah punya akun?';
+            document.getElementById('btn-switch-mode').innerText = isLoginMode ? 'Daftar Baru' : 'Masuk Sini';
+        }
+
+        async function submitAuth() {
+            const phone = document.getElementById('auth-phone').value.trim();
+            const password = document.getElementById('auth-password').value.trim();
+
+            if(!phone.startsWith('+')) {
+                alert("Nomor HP wajib diawali kode negara! Contoh: +628123456789");
+                return;
+            }
+            if(password.length < 6) {
+                alert("Kata sandi minimal berisi 6 karakter!");
+                return;
+            }
+
             try {
-                const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: {
-                        redirectTo: window.location.origin
-                    }
-                });
-                if (error) throw error;
+                if (isLoginMode) {
+                    // Logika MASUK (Login)
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({ phone: phone, password: password });
+                    if (error) throw error;
+                    alert("Berhasil masuk akun!");
+                } else {
+                    // Logika DAFTAR (Sign Up)
+                    const { data, error } = await supabaseClient.auth.signUp({ phone: phone, password: password });
+                    if (error) throw error;
+                    alert("Pendaftaran berhasil! Silakan langsung mencoba masuk.");
+                    switchAuthMode();
+                    return;
+                }
+                toggleAuthModal();
+                location.reload();
             } catch (error) {
-                console.error("Error Auth:", error.message);
-                alert("Gagal menghubungkan ke Google Auth: " + error.message);
+                alert("Gagal: " + error.message);
             }
         }
 
-        // Fungsi interaksi penguncian menu jika user belum login
         async function handleProtectedRoute(actionName) {
-            // Cek session user saat ini
             const { data: { session } } = await supabaseClient.auth.getSession();
-            
             if (!session) {
-                alert(`Untuk ${actionName}, Anda otomatis diarahkan untuk melakukan registrasi/login akun terlebih dahulu menggunakan Google Auth agar lebih mudah dan simpel.`);
-                loginWithGoogle();
+                alert(`Untuk ${actionName}, Anda otomatis diarahkan untuk mengisi nomor HP & password terlebih dahulu.`);
+                toggleAuthModal();
             } else {
-                alert(`Selamat datang! Anda berhasil mengakses fitur untuk ${actionName}.`);
-                // Di sini Anda bisa menambahkan routing halaman internal dashboard apabila session aktif
+                alert(`Akses Berhasil! Membuka halaman ${actionName}.`);
             }
         }
 
-        // Memantau perubahan status login (auth state) secara realtime
         supabaseClient.auth.onAuthStateChange((event, session) => {
             const authBtnContainer = document.getElementById('auth-buttons');
             if (session) {
                 authBtnContainer.innerHTML = `
-                    <button onclick="supabaseClient.auth.signOut().then(() => location.reload())" class="bg-red-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm hover:bg-red-600 transition">
-                        Keluar
-                    </button>
+                    <button onclick="supabaseClient.auth.signOut().then(() => location.reload())" class="bg-red-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm hover:bg-red-600 transition">Keluar</button>
                 `;
             }
         });
